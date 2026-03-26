@@ -51,7 +51,7 @@ After downloading, you can check which files are complete or incomplete/corrupte
 python verify_downloads.py
 ```
 
-# Data
+# Dataset
 ## 2.1 "NTU RGB+D 120" - 3D Skeletons
 https://rose1.ntu.edu.sg/dataset/actionRecognition/download/158
 
