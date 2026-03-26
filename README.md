@@ -2,7 +2,9 @@
 
 This project allows you to automatically download the **NTU RGB+D 120** dataset and related datasets from the [NTU Action Recognition Dataset](https://rose1.ntu.edu.sg/dataset/actionRecognition/), organizing the files into separate folders by section.  
 
-The script supports parallel downloads (up to 3 files at a time) and checks whether a file has already been downloaded to avoid duplication.
+The script supports **parallel downloads** (up to 3 files at a time) and checks whether a file has already been downloaded to avoid duplication. Additionally, you can verify if downloaded files are **complete and not corrupted** using the verification script.
+
+---
 
 ## Project structure
 
@@ -11,6 +13,7 @@ ntu-data-downloader/
 ├─ main.py                # Main script to start downloads
 ├─ download_utils.py      # Download and progress functions
 ├─ credentials.py         # User and password configuration
+├─ verify_downloads.py    # Verify completeness and integrity of downloaded files
 ├─ requirements.txt       # Required Python libraries
 ├─ downloads/             # Output folder for files (generated automatically)
 ```
@@ -35,10 +38,17 @@ Create a file named credentials.py in the project root directory with the follow
 USERNAME = "seu_usuario_ntu"
 PASSWORD = "sua_senha_ntu"
 ```
-## To Use
+## To download complete dataset
 
 ```bash
 python main.py  
+```
+
+## Verify downloaded files
+After downloading, you can check which files are complete or incomplete/corrupted:
+
+```bash
+python verify_downloads.py
 ```
 
 # Data
