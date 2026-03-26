@@ -1,5 +1,7 @@
 credentials.py
 
+downloads/
+
 venv/
 
 __pycache__/
