@@ -46,12 +46,14 @@ def download_file(session, url, folder, progress, task_id):
         total_size = int(r.headers.get('content-length', 0))
         downloaded = 0
 
+        progress.console.print(f"Starting download: {os.path.basename(filename)}")
         with open(filename, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 if chunk:
                     f.write(chunk)
                     downloaded += len(chunk)
                     progress.update(task_id, completed=downloaded, total=total_size)
+        progress.console.print(f"Finished download: {os.path.basename(filename)}")
 
 def download_all_parallel(session, tasks, max_workers=5):
     """
@@ -63,7 +65,7 @@ def download_all_parallel(session, tasks, max_workers=5):
         BarColumn(),
         DownloadColumn(),
         TimeRemainingColumn(),
-        refresh_per_second=1/(60*15), # refresh at each 15 min
+        refresh_per_second=1/(60*5), # refresh at each 5 min
     ) as progress:
 
         futures = []
