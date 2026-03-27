@@ -1,8 +1,8 @@
 # NTU RGB+D 120 Data Downloader
 
-This project allows you to automatically download the **NTU RGB+D 120** dataset and related datasets from the [NTU Action Recognition Dataset](https://rose1.ntu.edu.sg/dataset/actionRecognition/), organizing the files into separate folders by section.  
+This project allows you to automatically download the complete **NTU RGB+D 120** dataset from the [NTU Action Recognition Dataset](https://rose1.ntu.edu.sg/dataset/actionRecognition/), organizing the files into separate folders by section.  
 
-The script supports **parallel downloads** (up to 3 files at a time) and checks whether a file has already been downloaded to avoid duplication. Additionally, you can verify if downloaded files are **complete and not corrupted** using the verification script.
+The script supports **parallel downloads** (up to 5 files at a time) and checks whether a file has already been downloaded to avoid duplication. Additionally, you can verify if downloaded files are **complete and not corrupted** using the verification script.
 
 ---
 
@@ -35,23 +35,23 @@ pip install -r requirements.txt
 Create a file named credentials.py in the project root directory with the following content:
 
 ```bash
-USERNAME = "seu_usuario_ntu"
-PASSWORD = "sua_senha_ntu"
+USERNAME = "your_ntu_user"
+PASSWORD = "your_ntu_password"
 ```
-## To download complete dataset
+## To download the complete dataset
 
 ```bash
 python main.py  
 ```
 
-## Verify downloaded files
+## To verify downloaded files
 After downloading, you can check which files are complete or incomplete/corrupted:
 
 ```bash
 python verify_downloads.py
 ```
 
-# Dataset
+<!-- # Dataset
 ## 2.1 "NTU RGB+D 120" - 3D Skeletons
 https://rose1.ntu.edu.sg/dataset/actionRecognition/download/158
 
@@ -94,4 +94,5 @@ https://rose1.ntu.edu.sg/dataset/actionRecognition/download/124
 https://rose1.ntu.edu.sg/dataset/actionRecognition/download/221
 
 ## TVBench
-https://rose1.ntu.edu.sg/dataset/actionRecognition/download/230
+https://rose1.ntu.edu.sg/dataset/actionRecognition/download/230 -->
+
