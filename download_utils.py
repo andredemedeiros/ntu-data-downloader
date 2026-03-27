@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import os
 from rich.progress import Progress, BarColumn, DownloadColumn, TextColumn, TimeRemainingColumn
 import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 BASE_URL = "https://rose1.ntu.edu.sg/dataset/actionRecognition/download/"
 LOGIN_PAGE = "https://rose1.ntu.edu.sg/login/"
@@ -73,3 +74,36 @@ def download_batch(session, urls, folder):
             threads.append(t)
         for t in threads:
             t.join()
+
+def download_parallel(session, urls, folder, max_workers=5):
+    """Baixa arquivos em paralelo contínuo (máx N simultâneos)"""
+
+    with Progress(
+        TextColumn("[bold blue]{task.fields[filename]}", justify="right"),
+        BarColumn(),
+        DownloadColumn(),
+        TimeRemainingColumn(),
+    ) as progress:
+
+        futures = []
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for url in urls:
+                filename = os.path.basename(url) + ".zip"
+                task_id = progress.add_task("download", filename=filename, total=0)
+
+                future = executor.submit(
+                    download_file,
+                    session,
+                    url,
+                    folder,
+                    progress,
+                    task_id
+                )
+                futures.append(future)
+
+            # espera todos terminarem
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    progress.console.print(f"❌ Erro: {e}")
