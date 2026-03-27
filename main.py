@@ -1,8 +1,6 @@
-# main.py
 import os
 from credentials import USERNAME, PASSWORD
-#from download_utils import start_session, download_batch, BASE_URL
-from download_utils import start_session, download_parallel, BASE_URL
+from download_utils import start_session, download_all_parallel, BASE_URL
 
 BASE_DIR = "downloads/"
 
@@ -18,22 +16,18 @@ datasets = {
 
 session = start_session(USERNAME, PASSWORD)
 
-# for name, ids in datasets.items():
-#     print(f"\n📂 Baixando {name}...")
-#     folder = os.path.join(BASE_DIR, name)
-#     urls = [BASE_URL + str(i) for i in ids]
-
-#     # divide em blocos de 3 arquivos
-#     for i in range(0, len(urls), 3):
-#         batch = urls[i:i+3]
-#         print(f"⬇️ Lote: {batch}")
-#         download_batch(session, batch, folder)
+tasks = []
 
 for name, ids in datasets.items():
-    print(f"\n📂 Baixando {name}...")
     folder = os.path.join(BASE_DIR, name)
     urls = [BASE_URL + str(i) for i in ids]
 
-    download_parallel(session, urls, folder, max_workers=5)
+    for url in urls:
+        tasks.append((url, folder))
+
+print(f"🚀 Total de arquivos: {len(tasks)}")
+print("⚡ Iniciando downloads paralelos...\n")
+
+download_all_parallel(session, tasks, max_workers=5)
 
 print("\n🎉 Todos downloads finalizados!")

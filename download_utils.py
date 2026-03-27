@@ -107,3 +107,38 @@ def download_parallel(session, urls, folder, max_workers=5):
                     future.result()
                 except Exception as e:
                     progress.console.print(f"❌ Erro: {e}")
+
+def download_all_parallel(session, tasks, max_workers=5):
+    """
+    tasks = [(url, folder), ...]
+    """
+
+    with Progress(
+        TextColumn("[bold blue]{task.fields[filename]}", justify="right"),
+        BarColumn(),
+        DownloadColumn(),
+        TimeRemainingColumn(),
+    ) as progress:
+
+        futures = []
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for url, folder in tasks:
+                filename = os.path.basename(url) + ".zip"
+                task_id = progress.add_task("download", filename=filename, total=0)
+
+                future = executor.submit(
+                    download_file,
+                    session,
+                    url,
+                    folder,
+                    progress,
+                    task_id
+                )
+                futures.append(future)
+
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    progress.console.print(f"❌ Erro: {e}")
