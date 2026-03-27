@@ -1,10 +1,8 @@
-# NTU RGB+D 120 Data Downloader
+# NTU RGB+D 120 Dataset Downloader
 
 This project allows you to automatically download the complete **NTU RGB+D 120** dataset from the [NTU Action Recognition Dataset](https://rose1.ntu.edu.sg/dataset/actionRecognition/), organizing the files into separate folders by section.  
 
 The script supports **parallel downloads** (up to 5 files at a time) and checks whether a file has already been downloaded to avoid duplication. Additionally, you can verify if downloaded files are **complete and not corrupted** using the verification script.
-
----
 
 ## Project structure
 
@@ -38,18 +36,24 @@ Create a file named credentials.py in the project root directory with the follow
 USERNAME = "your_ntu_user"
 PASSWORD = "your_ntu_password"
 ```
-## To download the complete dataset
+## Download
+To downlod the complete dataset:
 
 ```bash
 python main.py  
 ```
 
-## To verify downloaded files
+## Verify download
 After downloading, you can check which files are complete or incomplete/corrupted:
 
 ```bash
 python verify_downloads.py
 ```
+
+## Citation
+Jun Liu, Amir Shahroudy, Mauricio Perez, Gang Wang, Ling-Yu Duan, Alex C. Kot, "NTU RGB+D 120: A Large-Scale Benchmark for 3D Human Activity Understanding", IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2019.
+
+
 
 <!-- # Dataset
 ## 2.1 "NTU RGB+D 120" - 3D Skeletons
