@@ -11,9 +11,10 @@ ntu-data-downloader/
 ├─ main.py                # Main script to start downloads
 ├─ download_utils.py      # Download and progress functions
 ├─ credentials.py         # User and password configuration
-├─ verify_downloads.py    # Verify completeness and integrity of downloaded files
+├─ check_downloads.py     # Verify completeness and integrity of downloaded files
 ├─ requirements.txt       # Required Python libraries
 ├─ downloads/             # Output folder for files (generated automatically)
+└─ sbatch.sh              # Slurm config
 ```
 
 ## Setup
@@ -43,11 +44,24 @@ To downlod the complete dataset:
 python main.py  
 ```
 
-## Verify download
-After downloading, you can check which files are complete or incomplete/corrupted:
+## Check download
+After downloading, you can check which files are complete or corrupted:
 
 ```bash
-python verify_downloads.py
+python check_downloads.py
+```
+
+## Slurm Job Submission
+The sbatch.sh script is used to submit the downloader as a batch job to a Slurm-managed cluster.
+It defines the required computational resources and execution settings.
+
+- Job name: `ntu_dl`
+- Log output: `log_download_<jobid>.txt`
+
+To submit the job, run:
+
+```bash
+sbatch sbatch.sh
 ```
 
 ## License and Disclaimer
