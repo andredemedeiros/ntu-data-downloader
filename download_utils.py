@@ -63,6 +63,7 @@ def download_all_parallel(session, tasks, max_workers=5):
         BarColumn(),
         DownloadColumn(),
         TimeRemainingColumn(),
+        refresh_per_second=1/(60*15), # refresh at each 15 min
     ) as progress:
 
         futures = []
