@@ -10,7 +10,7 @@ BASE_URL = "https://rose1.ntu.edu.sg/dataset/actionRecognition/download/"
 LOGIN_PAGE = "https://rose1.ntu.edu.sg/login/"
 
 def start_session(username, password):
-    """Inicia sessão e retorna objeto requests.Session()"""
+    """Log in and return the requests.Session() object"""
     session = requests.Session()
     response = session.get(LOGIN_PAGE)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -28,16 +28,16 @@ def start_session(username, password):
     }
 
     session.post(LOGIN_PAGE, data=payload, headers=headers)
-    print("✅ Login feito")
+    print("Logged in")
     return session
 
 def download_file(session, url, folder, progress, task_id):
-    """Baixa arquivo com barra de progresso Rich"""
+    """Download file with Rich progress bar"""
     os.makedirs(folder, exist_ok=True)
     filename = os.path.join(folder, url.split("/")[-1] + ".zip")
 
     if os.path.exists(filename):
-        progress.console.print(f"⚠️ {os.path.basename(filename)} já existe, pulando.")
+        progress.console.print(f"{os.path.basename(filename)} already exists, skipping.")
         progress.update(task_id, completed=1)
         return
 
@@ -52,61 +52,6 @@ def download_file(session, url, folder, progress, task_id):
                     f.write(chunk)
                     downloaded += len(chunk)
                     progress.update(task_id, completed=downloaded, total=total_size)
-
-def download_batch(session, urls, folder):
-    """Baixa até 3 arquivos em paralelo com barras de progresso separadas"""
-    threads = []
-    with Progress(
-        TextColumn("[bold blue]{task.fields[filename]}", justify="right"),
-        BarColumn(),
-        DownloadColumn(),
-        TimeRemainingColumn(),
-    ) as progress:
-        task_map = {}
-        for url in urls:
-            filename = os.path.basename(url) + ".zip"
-            task_id = progress.add_task("download", filename=filename, total=0)
-            task_map[url] = task_id
-
-        for url in urls:
-            t = threading.Thread(target=download_file, args=(session, url, folder, progress, task_map[url]))
-            t.start()
-            threads.append(t)
-        for t in threads:
-            t.join()
-
-def download_parallel(session, urls, folder, max_workers=5):
-    """Baixa arquivos em paralelo contínuo (máx N simultâneos)"""
-
-    with Progress(
-        TextColumn("[bold blue]{task.fields[filename]}", justify="right"),
-        BarColumn(),
-        DownloadColumn(),
-        TimeRemainingColumn(),
-    ) as progress:
-
-        futures = []
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            for url in urls:
-                filename = os.path.basename(url) + ".zip"
-                task_id = progress.add_task("download", filename=filename, total=0)
-
-                future = executor.submit(
-                    download_file,
-                    session,
-                    url,
-                    folder,
-                    progress,
-                    task_id
-                )
-                futures.append(future)
-
-            # espera todos terminarem
-            for future in as_completed(futures):
-                try:
-                    future.result()
-                except Exception as e:
-                    progress.console.print(f"❌ Erro: {e}")
 
 def download_all_parallel(session, tasks, max_workers=5):
     """
@@ -141,4 +86,4 @@ def download_all_parallel(session, tasks, max_workers=5):
                 try:
                     future.result()
                 except Exception as e:
-                    progress.console.print(f"❌ Erro: {e}")
+                    progress.console.print(f"Error: {e}")

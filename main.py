@@ -25,9 +25,9 @@ for name, ids in datasets.items():
     for url in urls:
         tasks.append((url, folder))
 
-print(f"🚀 Total de arquivos: {len(tasks)}")
-print("⚡ Iniciando downloads paralelos...\n")
+print(f"All files: {len(tasks)}")
+print("Starting downloads...\n")
 
 download_all_parallel(session, tasks, max_workers=5)
 
-print("\n🎉 Todos downloads finalizados!")
+print("\n All files downloaded!")
