@@ -1,4 +1,7 @@
 #!/bin/bash
+
+## SLURM CONFIGURATIONS
+
 #SBATCH --partition=prod10
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -8,11 +11,7 @@
 #SBATCH --job-name=ntu_dl
 #SBATCH --output=log_download_%j.txt
 
+## ENVIRONMENT AND EXECUTION
 
 source ./venv/bin/activate
-
-# Vai para o diretório do projeto
-cd ./ntu-data-downloader
-
-# Executa o script Python
 python main.py
