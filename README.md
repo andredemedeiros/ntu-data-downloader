@@ -50,8 +50,17 @@ After downloading, you can check which files are complete or incomplete/corrupte
 python verify_downloads.py
 ```
 
+## License and Disclaimer
+This project is licensed under the MIT License - see the LICENSE file for details.
+This project only provides tools to download the dataset.
+
+The NTU RGB+D 120 dataset is not distributed with this repository.
+Users must comply with the official dataset license and terms of use.
+
 ## Citation
 Jun Liu, Amir Shahroudy, Mauricio Perez, Gang Wang, Ling-Yu Duan, Alex C. Kot, "NTU RGB+D 120: A Large-Scale Benchmark for 3D Human Activity Understanding", IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2019.
+<br>
+F. Patrona, I. Mademlis, I. Pitas, “An Overview of Hand Gesture Languages for Autonomous UAV Handling”, in Proceedings of the Workshop on Aerial Robotic Systems Physically Interacting with the Environment (AIRPHARO), 2021.
 
 
 
