@@ -15,6 +15,3 @@
 
 source ./venv/bin/activate
 python main.py
-
-timeout 12h python main.py
-sbatch sbatch.sh

@@ -4,14 +4,14 @@ from download_utils import start_session, BASE_URL
 
 BASE_DIR = Path("downloads/")
 
-DATASETS = {
-    "skeletons":    [158],
-    "masked_depth": list(range(82, 111, 2)),
-    "full_depth":   [42] + list(range(159, 173)),
-    "rgb_videos":   list(range(142, 157)),
-    "ir_videos":    [105,107,109,113,115,117,119,40,45,43,120,121,122,123,124],
-    "auth_uav":     [221],
-    "tvbench":      [230],
+datasets = {
+    "skeletons": [157,158],
+    "masked_depth": [list(range(48, 81, 2)),list(range(82, 111, 2))],
+    #"full_depth": [42] + list(range(159, 173)),
+    "rgb_videos": [list(range(125, 142)),list(range(142, 157))],
+    "ir_videos": [list(range(71, 104)),105,107,109,113,115,117,119,40,45,43,120,121,122,123,124],
+    "auth_uav": [221],
+    "tvbench": [230]
 }
 
 def get_remote_size(session, url):

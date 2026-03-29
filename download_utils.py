@@ -55,7 +55,7 @@ def download_file(session, url, folder, progress, task_id):
                     progress.update(task_id, completed=downloaded, total=total_size)
         progress.console.print(f"Finished download: {os.path.basename(filename)}")
 
-def download_all_parallel(session, tasks, max_workers=5):
+def download_all_parallel(session, tasks, max_workers=10):
     """
     tasks = [(url, folder), ...]
     """
