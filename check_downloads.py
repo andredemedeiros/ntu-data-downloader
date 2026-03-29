@@ -6,10 +6,11 @@ BASE_DIR = Path("downloads/")
 
 DATASETS = {
     "skeletons": [157,158],
-    "masked_depth": [list(range(48, 81, 2)),list(range(82, 111, 2))],
+    "masked_depth": list(range(48, 81, 4)) + list(range(82, 111, 4)),
     #"full_depth": [42] + list(range(159, 173)),
-    "rgb_videos": [list(range(125, 142)),list(range(142, 157))],
-    "ir_videos": [list(range(71, 104)),105,107,109,113,115,117,119,40,45,43,120,121,122,123,124],
+    "rgb_videos": list(range(125, 142, 2)) + list(range(142, 157,2)),
+    #"ir_videos": list(range(71, 104,2)) + [105,107,109,113,115,117,119,40,45,43,120,121,122,123,124],
+    "ir_videos": list(range(71, 104,2)) + [105,109,115,119,45,120,122,124],
     "auth_uav": [221],
     "tvbench": [230]
 }
