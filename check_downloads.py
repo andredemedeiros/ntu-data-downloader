@@ -4,7 +4,7 @@ from download_utils import start_session, BASE_URL
 
 BASE_DIR = Path("downloads/")
 
-datasets = {
+DATASETS = {
     "skeletons": [157,158],
     "masked_depth": [list(range(48, 81, 2)),list(range(82, 111, 2))],
     #"full_depth": [42] + list(range(159, 173)),
