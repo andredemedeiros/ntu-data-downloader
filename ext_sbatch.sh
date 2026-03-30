@@ -8,7 +8,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=8G                   
 #SBATCH --time=24:0:0            
-#SBATCH --job-name=ntu_dl
+#SBATCH --job-name=ntu_xtr
 #SBATCH --output=log_download_%j.txt
 
 ## ENVIRONMENT AND EXECUTION
